@@ -1,0 +1,79 @@
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+}
+nav {
+  position: sticky;
+  width: 100%;
+  height: 10%;
+  background: #563d7c;
+  display: flex;
+  flex-direction: row;
+  z-index: 200;
+  box-shadow: 0 0 10px #563d7c;
+}
+#navbar {
+  width: 85%;
+  height: 100%;
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+#navbar .nav-btn {
+  margin-left: 5%;
+}
+nav * {
+  font-weight: 600;
+  color: white;
+  font-family: system-ui;
+  font-size: 18pt;
+  user-select: none;
+}
+.nav-btn {
+  width: 10%;
+  background: transparent;
+  border: 0;
+}
+.nav-btn:hover {
+  background: rgba(0, 0, 0, 0.15);
+}
+#mainLogo {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  font-weight: 700;
+  font-size: 26pt;
+  width: 21vw;
+  color: #ffcf50;
+}
+#user-info {
+  width: 15%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+#user-info:hover {
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.dropbtn {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+.dropdown-menu {
+  width: 100%;
+  margin: 0;
+}
+.dropdown-item {
+  padding: 5%;
+}

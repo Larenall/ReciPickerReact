@@ -1,0 +1,99 @@
+.filter-box {
+  max-width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  margin-bottom: 1em;
+  padding: 5px 0 5px 5px;
+}
+.custom-check {
+  margin: 1px 2px;
+  border-radius: 2px;
+  text-align: center;
+  white-space: nowrap;
+  font-size: small;
+  padding: 3px;
+  user-select: none;
+  cursor: pointer;
+  height: fit-content;
+  font-weight: 600;
+  font-size: 11pt;
+  padding: 1.5%;
+  display: inline-flex;
+}
+.checked:hover {
+  background: #4b8b3b;
+  color: white;
+}
+.unchecked:hover {
+  background: #c7003b;
+  color: white;
+}
+.neutral:hover {
+  background: #73797e;
+  color: white;
+}
+.checked {
+  border: 1px solid #4b8b3b;
+  box-shadow: 0 0 5px #4b8b3b;
+  color: #4b8b3b;
+}
+.unchecked {
+  border: 1px solid #c7003b;
+  box-shadow: 0 0 5px #c7003b;
+  color: #c7003b;
+}
+.neutral {
+  border: 1px solid #73797e;
+  box-shadow: 0 0 2px #73797e;
+  color: #73797e;
+}
+#slider-tooltips {
+  margin: 35px 0 10px 0;
+  width: 90%;
+  align-self: center;
+}
+.filters-sidebar {
+  padding: 2%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  max-width: 20%;
+  height: 100%;
+  box-shadow: 0px 0px 10px black;
+  z-index: 100;
+}
+.filterContainer {
+  display: flex;
+  flex-direction: column;
+}
+.filterContainer label {
+  font-size: 13pt;
+  font-weight: 600;
+}
+.filter-btn {
+  max-width: 100%;
+  margin-bottom: 2.5%;
+  font-family: system-ui;
+  font-weight: 500;
+}
+.btn-success {
+  background-color: #4b8b3b;
+  border-color: #4b8b3b;
+}
+.btn-success:hover {
+  background-color: #589d46;
+  border-color: #589d46;
+}
+
+.btn-danger {
+  background-color: #c7003b;
+  border-color: #c7003b;
+}
+.btn-danger:hover {
+  background-color: #da0443;
+  border-color: #da0443;
+}
+.noUi-connect {
+  background: #563d7c !important;
+}

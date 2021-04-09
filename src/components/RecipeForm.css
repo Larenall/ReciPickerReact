@@ -1,0 +1,68 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+textarea {
+  resize: none;
+}
+form#recipeForm {
+  width: 80vw;
+  height: 90vh;
+  border: 1px solid black;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgb(255, 255, 255);
+  padding: 2.5%;
+}
+div.screen {
+  background: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 998;
+  pointer-events: none;
+  opacity: 0;
+  transition: all 0.25s ease-out;
+}
+.screen.open {
+  opacity: 1;
+  pointer-events: all;
+}
+form .img-form-container {
+  max-width: 50% !important;
+  max-height: 50% !important;
+}
+form img {
+  max-width: 100%;
+  max-height: 100%;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 0 3px black;
+  border-radius: 2%;
+  position: relative;
+}
+.form-filters-container {
+  height: 37%;
+  margin: 2% auto;
+  overflow-y: auto;
+  border: 1px solid #ced4da;
+  border-radius: 0.3rem;
+}
+.form-filters-container div.custom-check {
+  padding: 1%;
+  font-size: 13pt;
+}
+button.btn-submit {
+  position: absolute;
+  bottom: 2.5%;
+  left: 2.5%;
+  width: 95%;
+}
+@media (max-height: 1080px) {
+  .form-filters-container {
+  height: 29%;
+} }
