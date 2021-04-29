@@ -17,6 +17,12 @@ export const closeAlert = (idx) => {
     payload: idx,
   };
 };
+export const setRecipeDetails = (recipe) => {
+  return {
+    type: "SETRECIPEDETAILS",
+    payload: recipe,
+  };
+};
 export const userSignedIn = (id, login, role) => {
   return {
     type: "USERSIGNEDIN",
@@ -25,7 +31,7 @@ export const userSignedIn = (id, login, role) => {
 };
 export const userLogOut = () => {
   return {
-    type: "USERLOGOUT"
+    type: "USERLOGOUT",
   };
 };
 export const sendRegData = (dataToSend, history) => async (
@@ -78,7 +84,7 @@ export const sendLogData = (dataToSend, history) => async (
   const password = document.querySelector("#userPass");
 
   if (data.userExists) {
-    if (data.passwordCorrect) {
+    if (data.isPasswordCorrect) {
       dispatch(userSignedIn(data.userID, data.login, data.role));
       dispatch(authorize(data.userID, data.login, data.role, history));
       customToggleClass(login, "is-valid");
@@ -90,6 +96,31 @@ export const sendLogData = (dataToSend, history) => async (
   } else {
     dispatch(addAlert("User", "doesn`t exists"));
     customToggleClass(login, "is-invalid");
+  }
+};
+export const changeUserPassword = (dataToSend, history) => async (
+  dispatch,
+  getState
+) => {
+  const isPasswordChanged = await fetch("https://localhost:5001/api/Users", {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(dataToSend),
+  }).then((response) => response.json());
+  const login = document.querySelector("div#changePassForm #UserLogin");
+  const email = document.querySelector("div#changePassForm #UserEmail");
+
+  if (isPasswordChanged) {
+    document.querySelector(".screen").classList.remove("open");
+    dispatch(addAlert("Password", "changed", "green"));
+    customToggleClass(login, "is-valid");
+    customToggleClass(email, "is-valid");
+  } else {
+    dispatch(addAlert("User", "doesn`t exists"));
+    customToggleClass(login, "is-invalid");
+    customToggleClass(email, "is-invalid");
   }
 };
 export const authorize = (id, login, role, history) => async (
@@ -178,7 +209,7 @@ export const getRecipes = (
       time.length !== 0 ? value.time >= time[0] && value.time <= time[1] : true
     );
   if (!approved) {
-    data = data.filter((f) => f.approved);
+    data = data.filter((f) => f.isApproved);
   }
   dispatch(setRecipes(data));
 };

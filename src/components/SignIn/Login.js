@@ -10,8 +10,8 @@ import { withRouter } from "react-router";
 class Login extends Component {
   onLogin = () => {
     this.props.clearAlerts();
-    const loginOrEmail = document.querySelector("#userLogin");
-    const pass = document.querySelector("#userPass");
+    const loginOrEmail = document.querySelector("form.login #userLogin");
+    const pass = document.querySelector("form.login #userPass");
     const loginNotEmpty = loginOrEmail.value.length !== 0;
     const passNotEmpty = pass.value.length !== 0;
     if (!loginNotEmpty) {
@@ -32,6 +32,7 @@ class Login extends Component {
       );
     }
   };
+
   render() {
     return (
       <form className="login input-group-lg" onClick={changeFocus}>
@@ -64,6 +65,14 @@ class Login extends Component {
         </div>
         <button className="btn btn-primary mt-2 btn-lg" onClick={this.onLogin}>
           Login
+        </button>
+        <button
+          className="btn btn-danger mt-2"
+          onClick={() => {
+            document.querySelector(".screen").classList.add("open");
+          }}
+        >
+          Forgot password?
         </button>
       </form>
     );

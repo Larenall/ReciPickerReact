@@ -39,7 +39,8 @@ nav * {
 .nav-btn:hover {
   background: rgba(0, 0, 0, 0.15);
 }
-#mainLogo {
+#mainLogo,
+#mainLogo * {
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -48,6 +49,9 @@ nav * {
   font-size: 26pt;
   width: 21vw;
   color: #ffcf50;
+}
+#mainLogo *:hover {
+  cursor: pointer;
 }
 #user-info {
   width: 15%;

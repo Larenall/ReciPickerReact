@@ -47,3 +47,6 @@
 .alert-danger {
   box-shadow: #947676 0px 0px 4px;
 }
+.input-group .btn {
+  width: 5vw;
+}

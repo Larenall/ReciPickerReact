@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import "./RecipeForm.css";
+import "./Screen.css";
 import { getRecipes, addAlert, clearAlerts } from "../actions/index";
 
 var filtersLocal;
@@ -78,7 +79,9 @@ class RecipeForm extends Component {
         },
         body: JSON.stringify(data),
       });
-      document.querySelector(".screen").classList.remove("open");
+      document
+        .querySelector("#recipeFormScreen.screen")
+        .classList.remove("open");
       this.props.getRecipes();
       return;
     }
@@ -90,10 +93,13 @@ class RecipeForm extends Component {
     return (
       <React.Fragment>
         <div
+          id="recipeFormScreen"
           className="screen"
           onClick={(e) => {
             if (e.target.classList.contains("screen")) {
-              document.querySelector(".screen").classList.remove("open");
+              document
+                .querySelector("#recipeFormScreen.screen")
+                .classList.remove("open");
             }
           }}
         >

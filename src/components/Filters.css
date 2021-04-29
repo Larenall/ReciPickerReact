@@ -14,24 +14,26 @@
   font-size: small;
   padding: 3px;
   user-select: none;
-  cursor: pointer;
   height: fit-content;
   font-weight: 600;
   font-size: 11pt;
   padding: 1.5%;
   display: inline-flex;
 }
-.checked:hover {
+:is(.form-filters-container, .filterContainer) .checked:hover {
   background: #4b8b3b;
   color: white;
+  cursor: pointer;
 }
-.unchecked:hover {
+:is(.form-filters-container, .filterContainer) .unchecked:hover {
   background: #c7003b;
   color: white;
+  cursor: pointer;
 }
-.neutral:hover {
+:is(.form-filters-container, .filterContainer) .neutral:hover {
   background: #73797e;
   color: white;
+  cursor: pointer;
 }
 .checked {
   border: 1px solid #4b8b3b;

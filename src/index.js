@@ -9,6 +9,7 @@ import thunk from "redux-thunk";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Alert from "./components/Alert";
 import Main from "./components/Main";
+import UsersRecipes from "./components/UsersRecipes";
 import { createBrowserHistory } from "history";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore, persistReducer } from "redux-persist";
@@ -35,7 +36,8 @@ ReactDOM.render(
       <Router>
         <Switch>
           <Route exact path="/" component={SignIn} />
-          <Route path="/recipes" component={Main} />
+          <Route exact path="/recipes" component={Main} />
+          <Route path="/recipes/my" component={UsersRecipes} />
           <Route path="/">
             <p>Page doesnt exists</p>
           </Route>

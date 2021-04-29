@@ -10,9 +10,9 @@ import { withRouter } from "react-router";
 class Register extends Component {
   tryRegister = () => {
     this.props.clearAlerts();
-    const login = document.querySelector("#registerLogin");
-    const email = document.querySelector("#registerEmail");
-    const password = document.querySelector("#registerPass");
+    const login = document.querySelector("form.register #registerLogin");
+    const email = document.querySelector("form.register #registerEmail");
+    const password = document.querySelector("form.register #registerPass");
     const loginIsCorrect = this.checkLogin(login);
     const EmailIsCorrect = this.checkEmail(email);
     const PassIsCorrect = this.checkPass(password);

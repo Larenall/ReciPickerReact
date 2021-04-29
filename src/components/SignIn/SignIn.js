@@ -5,16 +5,20 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./SignIn.css";
 import Login from "./Login";
 import Register from "./Register";
+import ChangePassForm from "./ChangePassForm";
 import { sendRegData } from "../../actions/index";
 import { withRouter } from "react-router";
 
 const SignIn = ({ props }) => {
   return (
-    <div className="SignIn">
-      <Login />
-      <div className="verticalLine"></div>
-      <Register />
-    </div>
+    <React.Fragment>
+      <ChangePassForm />
+      <div className="SignIn">
+        <Login />
+        <div className="verticalLine"></div>
+        <Register />
+      </div>
+    </React.Fragment>
   );
 };
 
@@ -22,8 +26,10 @@ export function showPass(e) {
   var input = e.target.parentNode.parentNode.querySelector("input");
   if (input.type === "password") {
     input.type = "text";
+    e.target.innerHTML = "Hide";
   } else {
     input.type = "password";
+    e.target.innerHTML = "Show";
   }
 }
 export function changeFocus(e) {
