@@ -7,10 +7,10 @@ import { bindActionCreators } from "redux";
 import RecipeDetails from "./RecipeDetails";
 
 const Recipes = (props) => {
-  const { getRecipes } = props;
+  const { getRecipes, approved } = props;
   useEffect(() => {
-    getRecipes();
-  }, [getRecipes]);
+    getRecipes([], [], [], approved);
+  }, [getRecipes, approved]);
 
   const getRecipeDetails = (recipe) => {
     document.querySelector("#recipeDetailsScreen.screen").classList.add("open");
@@ -114,7 +114,6 @@ export const svgFormat = (approved, size) => {
 function mapStateToProps(state) {
   return {
     filters: state.filters,
-    recipes: state.recipes,
   };
 }
 function matchDispatchToProps(dispatch) {

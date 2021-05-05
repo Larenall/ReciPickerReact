@@ -70,7 +70,7 @@ const Filters = (props) => {
         }
       })
     );
-    props.getRecipes(pos, neg, time);
+    props.getRecipes(pos, neg, time, props.approved);
   }
 
   return (

@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { withRouter } from "react-router";
 import "./Navbar.css";
-import { userLogOut } from "../actions/index";
+import { userLogOut, getRecipes } from "../actions/index";
 
 class Navbar extends Component {
   ShowDropdown = () => {
@@ -17,12 +17,19 @@ class Navbar extends Component {
   };
   LogOut = () => {
     this.props.history.replace("/");
+    this.props.userLogOut();
   };
   GoToUsersRecipes = () => {
-    this.props.history.push("/recipes/my");
+    this.props.history.push("/recipes/mine");
+    this.props.getRecipes([], [], [], false);
+  };
+  GoToFavouriteRecipes = () => {
+    this.props.history.push("/recipes/favourite");
+    this.props.getRecipes([], [], [], false);
   };
   GoToMain = () => {
     this.props.history.push("/recipes");
+    this.props.getRecipes([], [], [], true);
   };
 
   render() {
@@ -56,6 +63,9 @@ class Navbar extends Component {
             <div className="dropdown-item" onClick={this.GoToUsersRecipes}>
               My recipes
             </div>
+            <div className="dropdown-item" onClick={this.GoToFavouriteRecipes}>
+              Favourite recipes
+            </div>
             <div className="dropdown-divider"></div>
             <div className="dropdown-item" onClick={this.LogOut}>
               Log-out
@@ -74,7 +84,7 @@ function mapStateToProps(state) {
   };
 }
 function matchDispatchToProps(dispatch) {
-  return bindActionCreators({ userLogOut }, dispatch);
+  return bindActionCreators({ userLogOut, getRecipes }, dispatch);
 }
 export default withRouter(
   connect(mapStateToProps, matchDispatchToProps)(Navbar)

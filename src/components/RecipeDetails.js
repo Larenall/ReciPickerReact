@@ -4,10 +4,37 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import "./RecipeDetails.css";
+import {
+  addFavouriteToServer,
+  removeFavouriteFromServer,
+} from "../actions/index";
 import { svgFormat, dateFormat } from "./Recipes";
 
 const RecipeDetails = (props) => {
   const recipe = props.recipeDetails;
+  const formatFavourite = (recipeId) => {
+    if (props.userFavourite.includes(recipeId)) {
+      return (
+        <button
+          type="button"
+          className="btn btn-danger"
+          onClick={() => props.removeFavouriteFromServer(recipeId)}
+        >
+          Remove from favourites
+        </button>
+      );
+    } else {
+      return (
+        <button
+          type="button"
+          className="btn btn-info"
+          onClick={() => props.addFavouriteToServer(recipeId)}
+        >
+          Add to favourites
+        </button>
+      );
+    }
+  };
   return (
     <div
       id="recipeDetailsScreen"
@@ -30,16 +57,24 @@ const RecipeDetails = (props) => {
             <div>
               <b>Coocking method: </b> {recipe.method}
             </div>
-            <p>{recipe.time}</p>
+            <b>Coocking time: </b> {recipe.time}
           </div>
         </div>
+        <hr />
         <div className="row">
           <div className="col">
+            <b>Name: </b>
             {recipe.name + "  "}
-            {svgFormat(recipe.isApproved, 30)}
+            {svgFormat(recipe.isApproved, 30)}&nbsp;
+            {formatFavourite(recipe.recipeId)}
           </div>
-          <div className="col">{dateFormat(recipe.addDate)}</div>
+          <div className="col">
+            <b>Added: </b>
+            {dateFormat(recipe.addDate)}
+          </div>
         </div>
+        <hr />
+        <b>Tags: </b>
         <div className="details-filters-container">
           {props.filters.map((t) =>
             t.filters
@@ -64,9 +99,13 @@ function mapStateToProps(state) {
   return {
     filters: state.filters,
     recipeDetails: state.recipeDetails,
+    userFavourite: state.userFavourite,
   };
 }
 function matchDispatchToProps(dispatch) {
-  return bindActionCreators({}, dispatch);
+  return bindActionCreators(
+    { addFavouriteToServer, removeFavouriteFromServer },
+    dispatch
+  );
 }
 export default connect(mapStateToProps, matchDispatchToProps)(RecipeDetails);

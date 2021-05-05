@@ -19,11 +19,8 @@
   margin: 2% 0;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 1;
   overflow: hidden;
-}
-#recipeDetails :is(div, p) {
-  /* border: 1px solid rgba(0, 0, 0, 0.5); */
 }
 #recipeDetails .row {
   margin-bottom: 1.5%;

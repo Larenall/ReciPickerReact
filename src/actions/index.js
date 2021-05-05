@@ -23,6 +23,56 @@ export const setRecipeDetails = (recipe) => {
     payload: recipe,
   };
 };
+export const addFavourite = (recipeId) => {
+  return {
+    type: "ADDFAVOURITE",
+    payload: recipeId,
+  };
+};
+export const addFavouriteToServer = (recipeId) => async (
+  dispatch,
+  getState
+) => {
+  await fetch("https://localhost:5001/api/UserFavouriteRecipes", {
+    method: "POST",
+    headers: {
+      Authorization: "Bearer " + getState().token,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ recipeId, userId: getState().user.userId }),
+  });
+  dispatch(addFavourite(recipeId));
+};
+
+export const removeFavourite = (recipeId) => {
+  return {
+    type: "REMOVEFAVOURITE",
+    payload: recipeId,
+  };
+};
+
+export const removeFavouriteFromServer = (recipeId) => async (
+  dispatch,
+  getState
+) => {
+  await fetch("https://localhost:5001/api/UserFavouriteRecipes", {
+    method: "DELETE",
+    headers: {
+      Authorization: "Bearer " + getState().token,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ recipeId, userId: getState().user.userId }),
+  });
+  dispatch(removeFavourite(recipeId));
+};
+
+export const setFavourite = (userFavourite) => {
+  return {
+    type: "SETFAVOURITE",
+    payload: userFavourite,
+  };
+};
+
 export const userSignedIn = (id, login, role) => {
   return {
     type: "USERSIGNEDIN",
@@ -52,6 +102,7 @@ export const sendRegData = (dataToSend, history) => async (
     if (!data.emailTaken) {
       dispatch(addAlert("Register", "successful", "green"));
       dispatch(userSignedIn(data.userID, data.login, data.role));
+      dispatch(setFavourite(data.userFavourite));
       dispatch(authorize(data.userID, data.login, data.role, history));
       customToggleClass(email, "is-valid");
       customToggleClass(login, "is-valid");
@@ -86,6 +137,7 @@ export const sendLogData = (dataToSend, history) => async (
   if (data.userExists) {
     if (data.isPasswordCorrect) {
       dispatch(userSignedIn(data.userID, data.login, data.role));
+      dispatch(setFavourite(data.userFavourite));
       dispatch(authorize(data.userID, data.login, data.role, history));
       customToggleClass(login, "is-valid");
       customToggleClass(password, "is-valid");
@@ -149,6 +201,7 @@ export const setToken = (token) => {
     payload: token,
   };
 };
+
 export const setFilters = (filters) => {
   return {
     type: "SETFILTERS",
@@ -182,7 +235,7 @@ export const getRecipes = (
   pos = [],
   neg = [],
   time = [],
-  approved = false
+  approvedOnly = true
 ) => async (dispatch, getState) => {
   var data = await fetch("https://localhost:5001/api/Recipes", {
     method: "GET",
@@ -208,11 +261,12 @@ export const getRecipes = (
     .filter((value) =>
       time.length !== 0 ? value.time >= time[0] && value.time <= time[1] : true
     );
-  if (!approved) {
+  if (approvedOnly) {
     data = data.filter((f) => f.isApproved);
   }
   dispatch(setRecipes(data));
 };
+
 export const filterChecked = (type, id, state) => {
   return {
     type: "FILTERCHECKED",

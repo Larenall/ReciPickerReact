@@ -9,7 +9,7 @@ import Navbar from "./Navbar";
 import Recipes from "./Recipes";
 import { clearAlerts } from "../actions/index";
 
-const Main = (props) => {
+const FavouriteRecipes = (props) => {
   const { clearAlerts } = props;
   useEffect(() => {
     clearAlerts();
@@ -22,8 +22,13 @@ const Main = (props) => {
           <Navbar />
           <RecipeForm />
           <article>
-            <Filters approved={true} />
-            <Recipes recipes={props.recipes} approved={true} />
+            <Filters approved={false} />
+            <Recipes
+              recipes={props.recipes.filter((el) =>
+                props.userFavourite.includes(el.recipeId)
+              )}
+              approved={false}
+            />
           </article>
         </React.Fragment>
       ) : (
@@ -32,15 +37,19 @@ const Main = (props) => {
     </React.Fragment>
   );
 };
+
 function mapStateToProps(state) {
   return {
     filters: state.filters,
     user: state.user,
     token: state.token,
     recipes: state.recipes,
+    userFavourite: state.userFavourite,
   };
 }
 function matchDispatchToProps(dispatch) {
   return bindActionCreators({ clearAlerts }, dispatch);
 }
-export default withRouter(connect(mapStateToProps, matchDispatchToProps)(Main));
+export default withRouter(
+  connect(mapStateToProps, matchDispatchToProps)(FavouriteRecipes)
+);

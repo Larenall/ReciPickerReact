@@ -22,8 +22,13 @@ const UsersRecipes = (props) => {
           <Navbar />
           <RecipeForm />
           <article>
-            <Filters />
-            <Recipes />
+            <Filters approved={false} />
+            <Recipes
+              recipes={props.recipes.filter(
+                (el) => el.userId === props.user.id
+              )}
+              approved={false}
+            />
           </article>
         </React.Fragment>
       ) : (
@@ -38,6 +43,7 @@ function mapStateToProps(state) {
     filters: state.filters,
     user: state.user,
     token: state.token,
+    recipes: state.recipes,
   };
 }
 function matchDispatchToProps(dispatch) {

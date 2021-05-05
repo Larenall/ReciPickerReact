@@ -14,6 +14,7 @@ import { createBrowserHistory } from "history";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import FavouriteRecipes from "./components/FavouriteRecipes";
 
 const persistConfig = {
   key: "root",
@@ -37,7 +38,8 @@ ReactDOM.render(
         <Switch>
           <Route exact path="/" component={SignIn} />
           <Route exact path="/recipes" component={Main} />
-          <Route path="/recipes/my" component={UsersRecipes} />
+          <Route path="/recipes/mine" component={UsersRecipes} />
+          <Route path="/recipes/favourite" component={FavouriteRecipes} />
           <Route path="/">
             <p>Page doesnt exists</p>
           </Route>
