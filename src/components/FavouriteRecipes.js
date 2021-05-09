@@ -17,7 +17,7 @@ const FavouriteRecipes = (props) => {
 
   return (
     <React.Fragment>
-      {props.user && props.token ? (
+      {props.currentUser && props.token ? (
         <React.Fragment>
           <Navbar />
           <RecipeForm />
@@ -41,7 +41,7 @@ const FavouriteRecipes = (props) => {
 function mapStateToProps(state) {
   return {
     filters: state.filters,
-    user: state.user,
+    currentUser: state.currentUser,
     token: state.token,
     recipes: state.recipes,
     userFavourite: state.userFavourite,

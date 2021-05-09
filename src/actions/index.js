@@ -39,7 +39,7 @@ export const addFavouriteToServer = (recipeId) => async (
       Authorization: "Bearer " + getState().token,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ recipeId, userId: getState().user.userId }),
+    body: JSON.stringify({ recipeId, userId: getState().currentUser.userId }),
   });
   dispatch(addFavourite(recipeId));
 };
@@ -61,7 +61,7 @@ export const removeFavouriteFromServer = (recipeId) => async (
       Authorization: "Bearer " + getState().token,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ recipeId, userId: getState().user.userId }),
+    body: JSON.stringify({ recipeId, userId: getState().currentUser.userId }),
   });
   dispatch(removeFavourite(recipeId));
 };
@@ -84,7 +84,7 @@ export const userLogOut = () => {
     type: "USERLOGOUT",
   };
 };
-export const sendRegData = (dataToSend, history) => async (
+export const registerUser = (dataToSend, history) => async (
   dispatch,
   getState
 ) => {
@@ -120,7 +120,7 @@ export const sendRegData = (dataToSend, history) => async (
   }
 };
 
-export const sendLogData = (dataToSend, history) => async (
+export const signInUser = (dataToSend, history) => async (
   dispatch,
   getState
 ) => {
@@ -154,13 +154,16 @@ export const changeUserPassword = (dataToSend, history) => async (
   dispatch,
   getState
 ) => {
-  const isPasswordChanged = await fetch("https://localhost:5001/api/Users", {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(dataToSend),
-  }).then((response) => response.json());
+  const isPasswordChanged = await fetch(
+    "https://localhost:5001/api/Users/role",
+    {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dataToSend),
+    }
+  ).then((response) => response.json());
   const login = document.querySelector("div#changePassForm #UserLogin");
   const email = document.querySelector("div#changePassForm #UserEmail");
 
@@ -282,4 +285,33 @@ export const clearFilters = () => {
   return {
     type: "CLEARFILTERS",
   };
+};
+export const setUsers = (data) => {
+  return {
+    type: "SETUSERS",
+    payload: data,
+  };
+};
+
+export const getUsers = () => async (dispatch, getState) => {
+  var data = await fetch("https://localhost:5001/api/Users", {
+    method: "GET",
+    headers: {
+      Authorization: "Bearer " + getState().token,
+    },
+  }).then((response) => response.json());
+
+  dispatch(setUsers(data));
+};
+
+export const updateUserRole = (userId, role) => async (dispatch, getState) => {
+  await fetch("https://localhost:5001/api/Users/role", {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + getState().token,
+    },
+    body: JSON.stringify({ UserId: userId, Role: role }),
+  });
+  dispatch(getUsers());
 };

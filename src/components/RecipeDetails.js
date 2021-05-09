@@ -50,27 +50,27 @@ const RecipeDetails = (props) => {
       <div id="recipeDetails">
         <div className="row">
           <div className="col">
-            <img alt="" src={recipe.imgUrl} />
+            <img alt="" src={recipe?.imgUrl} />
           </div>
           <div className="col">
-            <b>Recipe info: </b> {recipe.info}
+            <b>Recipe info: </b> {recipe?.info}
             <div>
-              <b>Coocking method: </b> {recipe.method}
+              <b>Coocking method: </b> {recipe?.method}
             </div>
-            <b>Coocking time: </b> {recipe.time}
+            <b>Coocking time: </b> {recipe?.time}
           </div>
         </div>
         <hr />
         <div className="row">
           <div className="col">
             <b>Name: </b>
-            {recipe.name + "  "}
-            {svgFormat(recipe.isApproved, 30)}&nbsp;
-            {formatFavourite(recipe.recipeId)}
+            {recipe?.name + "  "}
+            {svgFormat(recipe?.isApproved, 30)}&nbsp;
+            {formatFavourite(recipe?.recipeId)}
           </div>
           <div className="col">
             <b>Added: </b>
-            {dateFormat(recipe.addDate)}
+            {dateFormat(recipe?.addDate)}
           </div>
         </div>
         <hr />
@@ -78,7 +78,7 @@ const RecipeDetails = (props) => {
         <div className="details-filters-container">
           {props.filters.map((t) =>
             t.filters
-              .filter((f) => recipe.filters?.includes(f.filterID))
+              .filter((f) => recipe?.filters?.includes(f.filterID))
               .map((f) => (
                 <div
                   className="custom-check checked"

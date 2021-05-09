@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { sendRegData, addAlert, clearAlerts } from "../../actions/index";
+import { registerUser, addAlert, clearAlerts } from "../../actions/index";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./SignIn.css";
 import { customToggleClass, showPass, changeFocus } from "./SignIn";
@@ -28,7 +28,7 @@ class Register extends Component {
         email: email.value,
         password: password.value,
       };
-      this.props.sendRegData(userData, this.props.history);
+      this.props.registerUser(userData, this.props.history);
     }
   };
   checkLogin = (login) => {
@@ -160,14 +160,13 @@ class Register extends Component {
   }
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
   return {
     alert: state.alert,
-    ownProps,
   };
 }
 function matchDispatchToProps(dispatch) {
-  return bindActionCreators({ sendRegData, addAlert, clearAlerts }, dispatch);
+  return bindActionCreators({ registerUser, addAlert, clearAlerts }, dispatch);
 }
 export default withRouter(
   connect(mapStateToProps, matchDispatchToProps)(Register)

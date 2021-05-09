@@ -1,4 +1,4 @@
-export default function UserReducer(user = null, action) {
+export default function CurrentUserReducer(user = null, action) {
   switch (action.type) {
     case "USERSIGNEDIN":
       return action.payload;

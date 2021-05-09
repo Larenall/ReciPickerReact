@@ -72,6 +72,10 @@ const Filters = (props) => {
     );
     props.getRecipes(pos, neg, time, props.approved);
   }
+  const onClearFilter = () => {
+    props.getRecipes([], [], [], props.approved);
+    props.clearFilters();
+  };
 
   return (
     <div className="filters-sidebar">
@@ -111,7 +115,7 @@ const Filters = (props) => {
       <button
         type="button"
         className="btn btn-danger filter-btn"
-        onClick={props.clearFilters}
+        onClick={onClearFilter}
       >
         Clear Filters
       </button>

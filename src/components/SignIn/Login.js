@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { sendLogData, addAlert, clearAlerts } from "../../actions/index";
+import { signInUser, addAlert, clearAlerts } from "../../actions/index";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./SignIn.css";
 import { customToggleClass, showPass, changeFocus } from "./SignIn";
@@ -23,7 +23,7 @@ class Login extends Component {
       customToggleClass(pass, "is-invalid");
     }
     if (loginNotEmpty && passNotEmpty) {
-      this.props.sendLogData(
+      this.props.signInUser(
         {
           loginOrEmail: loginOrEmail.value,
           password: pass.value,
@@ -85,7 +85,7 @@ function mapStateToProps(state) {
   };
 }
 const matchDispatchToProps = (dispatch) => {
-  return bindActionCreators({ sendLogData, addAlert, clearAlerts }, dispatch);
+  return bindActionCreators({ signInUser, addAlert, clearAlerts }, dispatch);
 };
 export default withRouter(
   connect(mapStateToProps, matchDispatchToProps)(Login)

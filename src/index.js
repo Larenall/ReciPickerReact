@@ -15,6 +15,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import FavouriteRecipes from "./components/FavouriteRecipes";
+import RoleManager from "./components/RoleManager";
 
 const persistConfig = {
   key: "root",
@@ -40,6 +41,7 @@ ReactDOM.render(
           <Route exact path="/recipes" component={Main} />
           <Route path="/recipes/mine" component={UsersRecipes} />
           <Route path="/recipes/favourite" component={FavouriteRecipes} />
+          <Route exact path="/roles" component={RoleManager} />
           <Route path="/">
             <p>Page doesnt exists</p>
           </Route>

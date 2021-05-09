@@ -27,6 +27,9 @@ class Navbar extends Component {
     this.props.history.push("/recipes/favourite");
     this.props.getRecipes([], [], [], false);
   };
+  GoToRoles = () => {
+    this.props.history.push("/roles");
+  };
   GoToMain = () => {
     this.props.history.push("/recipes");
     this.props.getRecipes([], [], [], true);
@@ -49,6 +52,11 @@ class Navbar extends Component {
           >
             Add Recipe
           </button>
+          {this.props.currentUser.role === "admin" ? (
+            <button className="nav-btn" onClick={this.GoToRoles}>
+              Manage roles
+            </button>
+          ) : null}
         </div>
         <div
           id="user-info"
@@ -56,8 +64,8 @@ class Navbar extends Component {
           onMouseLeave={this.HideDropdown}
         >
           <div onClick={this.ShowDropdown} className="dropbtn">
-            {this.props.user.login.charAt(0).toUpperCase() +
-              this.props.user.login.slice(1)}
+            {this.props.currentUser.login.charAt(0).toUpperCase() +
+              this.props.currentUser.login.slice(1)}
           </div>
           <div className="dropdown-menu">
             <div className="dropdown-item" onClick={this.GoToUsersRecipes}>
@@ -80,7 +88,7 @@ class Navbar extends Component {
 function mapStateToProps(state) {
   return {
     filters: state.filters,
-    user: state.user,
+    currentUser: state.currentUser,
   };
 }
 function matchDispatchToProps(dispatch) {

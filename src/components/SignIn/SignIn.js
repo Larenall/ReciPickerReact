@@ -6,7 +6,7 @@ import "./SignIn.css";
 import Login from "./Login";
 import Register from "./Register";
 import ChangePassForm from "./ChangePassForm";
-import { sendRegData } from "../../actions/index";
+import { registerUser } from "../../actions/index";
 import { withRouter } from "react-router";
 
 const SignIn = ({ props }) => {
@@ -66,7 +66,7 @@ function mapStateToProps(state) {
 }
 
 function matchDispatchToProps(dispatch) {
-  return bindActionCreators({ sendRegData }, dispatch);
+  return bindActionCreators({ registerUser }, dispatch);
 }
 export default withRouter(
   connect(mapStateToProps, matchDispatchToProps)(SignIn)
