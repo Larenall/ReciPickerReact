@@ -8,6 +8,7 @@ import RecipeForm from "./RecipeForm.js";
 import Navbar from "./Navbar";
 import Recipes from "./Recipes";
 import { clearAlerts } from "../actions/index";
+import RecipeDetails from "./RecipeDetails";
 
 const Main = (props) => {
   const { clearAlerts } = props;
@@ -23,6 +24,7 @@ const Main = (props) => {
           <RecipeForm />
           <article>
             <Filters approved={true} />
+            <RecipeDetails />
             <Recipes recipes={props.recipes} approved={true} />
           </article>
         </React.Fragment>

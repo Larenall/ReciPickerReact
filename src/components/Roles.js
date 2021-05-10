@@ -11,6 +11,7 @@ const Roles = (props) => {
   useEffect(() => {
     getUsers();
   }, [getUsers]);
+
   const onChange = (e) => {
     const userId = Number(e.target.closest("tr").id);
     const role = e.target.value;
@@ -27,25 +28,27 @@ const Roles = (props) => {
           </tr>
         </thead>
         <tbody>
-          {props.users?.map((el) => {
-            return (
-              <tr key={el.userId} id={el.userId}>
-                <th scope="row">{el.userId}</th>
-                <td>{el.login}</td>
-                <td>
-                  <select
-                    defaultValue={el.role}
-                    className="form-select"
-                    onChange={onChange}
-                  >
-                    <option value="admin">Administrator</option>
-                    <option value="mod">Moderator</option>
-                    <option value="user">Regular user</option>
-                  </select>
-                </td>
-              </tr>
-            );
-          })}
+          {props.users
+            ?.filter((el) => el.userId !== props.currentUser.id)
+            .map((el) => {
+              return (
+                <tr key={el.userId} id={el.userId}>
+                  <th scope="row">{el.userId}</th>
+                  <td>{el.login}</td>
+                  <td>
+                    <select
+                      defaultValue={el.role}
+                      className="form-select"
+                      onChange={onChange}
+                    >
+                      <option value="admin">Administrator</option>
+                      <option value="mod">Moderator</option>
+                      <option value="user">Regular user</option>
+                    </select>
+                  </td>
+                </tr>
+              );
+            })}
         </tbody>
       </table>
     </div>
@@ -55,6 +58,7 @@ const Roles = (props) => {
 function mapStateToProps(state) {
   return {
     users: state.users,
+    currentUser: state.currentUser,
   };
 }
 function matchDispatchToProps(dispatch) {

@@ -17,11 +17,15 @@ const RoleManager = (props) => {
   return (
     <React.Fragment>
       {props.currentUser && props.token ? (
-        <React.Fragment>
-          <Navbar />
-          <RecipeForm />
-          <Roles />
-        </React.Fragment>
+        props.currentUser.role === "admin" ? (
+          <React.Fragment>
+            <Navbar />
+            <RecipeForm />
+            <Roles />
+          </React.Fragment>
+        ) : (
+          props.history.replace("/recipes")
+        )
       ) : (
         props.history.replace("/")
       )}

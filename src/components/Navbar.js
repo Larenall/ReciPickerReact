@@ -16,23 +16,26 @@ class Navbar extends Component {
     drop.classList.remove("show");
   };
   LogOut = () => {
+    this.HideDropdown();
     this.props.history.replace("/");
     this.props.userLogOut();
   };
   GoToUsersRecipes = () => {
+    this.HideDropdown();
     this.props.history.push("/recipes/mine");
-    this.props.getRecipes([], [], [], false);
   };
   GoToFavouriteRecipes = () => {
+    this.HideDropdown();
     this.props.history.push("/recipes/favourite");
-    this.props.getRecipes([], [], [], false);
   };
   GoToRoles = () => {
     this.props.history.push("/roles");
   };
+  GoToApprove = () => {
+    this.props.history.push("/recipes/approve");
+  };
   GoToMain = () => {
     this.props.history.push("/recipes");
-    this.props.getRecipes([], [], [], true);
   };
 
   render() {
@@ -52,6 +55,11 @@ class Navbar extends Component {
           >
             Add Recipe
           </button>
+          {this.props.currentUser.role !== "user" ? (
+            <button className="nav-btn" onClick={this.GoToApprove}>
+              Approve recipes
+            </button>
+          ) : null}
           {this.props.currentUser.role === "admin" ? (
             <button className="nav-btn" onClick={this.GoToRoles}>
               Manage roles

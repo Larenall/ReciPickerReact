@@ -4,7 +4,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { getRecipes, setRecipeDetails } from "../actions/index";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import RecipeDetails from "./RecipeDetails";
 
 const Recipes = (props) => {
   const { getRecipes, approved } = props;
@@ -19,7 +18,6 @@ const Recipes = (props) => {
 
   return (
     <React.Fragment>
-      <RecipeDetails />
       <div id="recipes">
         {props.recipes?.map((el) => {
           return (

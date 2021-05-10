@@ -8,7 +8,7 @@ import RecipeForm from "./RecipeForm.js";
 import Navbar from "./Navbar";
 import Recipes from "./Recipes";
 import { clearAlerts } from "../actions/index";
-
+import RecipeDetails from "./RecipeDetails";
 const UsersRecipes = (props) => {
   const { clearAlerts } = props;
   useEffect(() => {
@@ -23,6 +23,7 @@ const UsersRecipes = (props) => {
           <RecipeForm />
           <article>
             <Filters approved={false} />
+            <RecipeDetails />
             <Recipes
               recipes={props.recipes.filter(
                 (el) => el.userId === props.currentUser.id

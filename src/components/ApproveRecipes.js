@@ -8,7 +8,7 @@ import RecipeForm from "./RecipeForm.js";
 import Navbar from "./Navbar";
 import Recipes from "./Recipes";
 import { clearAlerts } from "../actions/index";
-import RecipeDetails from "./RecipeDetails";
+import RecipesApproveDetails from "./RecipesApproveDetails";
 
 const FavouriteRecipes = (props) => {
   const { clearAlerts } = props;
@@ -19,20 +19,22 @@ const FavouriteRecipes = (props) => {
   return (
     <React.Fragment>
       {props.currentUser && props.token ? (
-        <React.Fragment>
-          <Navbar />
-          <RecipeForm />
-          <article>
-            <Filters approved={false} />
-            <RecipeDetails />
-            <Recipes
-              recipes={props.recipes.filter((el) =>
-                props.userFavourite.includes(el.recipeId)
-              )}
-              approved={false}
-            />
-          </article>
-        </React.Fragment>
+        props.currentUser.role !== "user" ? (
+          <React.Fragment>
+            <Navbar />
+            <RecipeForm />
+            <article>
+              <Filters approved={false} />
+              <RecipesApproveDetails />
+              <Recipes
+                recipes={props.recipes.filter((el) => !el.isApproved)}
+                approved={false}
+              />
+            </article>
+          </React.Fragment>
+        ) : (
+          props.history.replace("/recipes")
+        )
       ) : (
         props.history.replace("/")
       )}
