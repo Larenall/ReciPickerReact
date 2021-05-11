@@ -23,6 +23,12 @@ export const setRecipeDetails = (recipe) => {
     payload: recipe,
   };
 };
+export const updateRecipeDetails = (fieldToUpdate, data) => {
+  return {
+    type: "UPDATERECIPEDETAILS",
+    payload: { fieldToUpdate, data },
+  };
+};
 export const addFavourite = (recipeId) => {
   return {
     type: "ADDFAVOURITE",
@@ -314,4 +320,20 @@ export const updateUserRole = (userId, role) => async (dispatch, getState) => {
     body: JSON.stringify({ UserId: userId, Role: role }),
   });
   dispatch(getUsers());
+};
+
+export const updateRecipe = (fieldToUpdate, data) => async (
+  dispatch,
+  getState
+) => {
+  dispatch(updateRecipeDetails(fieldToUpdate, data));
+  await fetch("https://localhost:5001/api/Recipes", {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + getState().token,
+    },
+    body: JSON.stringify(getState().recipeDetails),
+  });
+  dispatch(getRecipes([], [], [], false));
 };
